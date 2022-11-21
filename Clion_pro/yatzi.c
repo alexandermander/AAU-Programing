@@ -1,54 +1,79 @@
+//
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 
 #define DIE_MAX_EYES 6
-#define N 15
+//#define N 25
 #define YATZIGAMELENTH 15
 
-void roll_multiple_dies(int *array);
-int alike(const int *dice, int *sum, int size);
-int pair_one(const int *dice, int *sum, int ishoue);
-int pair_two(const int *dice, int *sum);
-int three_alike(const int *dice, int *sum, int is_four);
-int small_lange(const int *dice, int *sum, int stor);
-int yatzy(const int *dice, int *sum);
-int house(const int *dice, int *sum);
-int chance(int *dice, int *sum);
+void roll_multiple_dies(int *array, int N);
+int alike(const int *dice, int *sum, int size, int N);
+int pair_one(const int *dice, int *sum, int ishoue, int N);
+int pair_two(const int *dice, int *sum, int N);
+int three_alike(const int *dice, int *sum, int is_four, int N);
+int small_lange(const int *dice, int *sum, int stor, int N);
+int yatzy(int *dice, int *sum, int N);
+int house(const int *dice, int *sum, int N);
+int chance(int *dice, int *sum, int N);
 
 int main(void) {
-    int dice_array[N];
     int sum_arry[YATZIGAMELENTH];
     char names[][17] = {"1-ere","2-ere","3-ere","4-ere","5-ere","6-ere","Et par","To par","Tre ens","Fire ens","Lille","Stor","Fuld hus","Chance","YATZY","TOTAL"};
+    int N;
+    do {
+        printf("Yatzy with how many dies (a number less than 5 terminates) ");
+        scanf(" %d", &N);
+        printf("%d\n", N);
 
 
-    //roll_multiple_dies(dice_array);
+    int dice_array[N];
+
+
+    int total_sum = 0;
     srand(time(NULL));  // Seeding the random number generator.
-    // Do this only once!
     for (int i = 0; i < YATZIGAMELENTH; ++i) {
         sum_arry[i] = 0;
+
         printf("%s", names[i]);
-        roll_multiple_dies(dice_array);
+        roll_multiple_dies(dice_array, N);
         if (i<6) {
-            printf(" -- %d", alike(dice_array, &sum_arry[i], i));
+            printf(" -- %d", alike(dice_array, &sum_arry[i], i, N));
         }
-        if(i == 6) printf(" -- %d", pair_one(dice_array, &sum_arry[i], 0));
-        if(i == 7) printf(" -- %d", pair_two(dice_array, &sum_arry[i]));
-        if(i == 8) printf(" -- %d", three_alike(dice_array, &sum_arry[i], 0));
-        if(i == 9) printf(" -- %d", three_alike(dice_array, &sum_arry[i], 1));
-        if(i == 10) printf(" -- %d", small_lange(dice_array, &sum_arry[i], 0));
-        if(i == 11) printf(" -- %d", small_lange(dice_array, &sum_arry[i], 1));
-        if(i == 12) printf(" -- %d", house(dice_array, &sum_arry[i]));
-        if(i == 13) printf(" -- %d", chance(dice_array, &sum_arry[i]));
-        if(i == 14) printf(" -- %d", yatzy(dice_array, &sum_arry[i]));
+        if(i == 6) printf(" -- %d", pair_one(dice_array, &sum_arry[i], 0, N));
+        if(i == 7) printf(" -- %d", pair_two(dice_array, &sum_arry[i], N));
+        if(i == 8) printf(" -- %d", three_alike(dice_array, &sum_arry[i], 0, N));
+        if(i == 9) printf(" -- %d", three_alike(dice_array, &sum_arry[i], 1, N));
+        if(i == 10) printf(" -- %d", small_lange(dice_array, &sum_arry[i], 0, N));
+        if(i == 11) printf(" -- %d", small_lange(dice_array, &sum_arry[i], 1, N));
+        if(i == 12) printf(" -- %d", house(dice_array, &sum_arry[i], N));
+        if(i == 13) printf(" -- %d", chance(dice_array, &sum_arry[i], N));
+        if(i == 14)
+        {
+            printf(" -- %d\n", yatzy(dice_array, &sum_arry[i], N));
+            printf("\nScore board:");
+            for (int j = 0; j < YATZIGAMELENTH; ++j) {
+                total_sum = total_sum + sum_arry[j];
+                if (j == 6 && total_sum > 63){
+                    printf("\nBONUS : 50\n");
+                    total_sum = total_sum + 50;
+                } else if(j == 6 && total_sum < 63)
+                {
+                    printf("\nBONUS : 0\n");
+                }
+                printf("\n%s : %d ", names[j], sum_arry[j]);
+            }
+            printf("\nTOTAL : %d", total_sum);
+        }
         printf("\n");
 
-    }
 
+    }
+    } while (N >= 5);
     return 0;
 }
 
-int alike(const int *dice, int *sum, int size){
+int alike(const int *dice, int *sum, int size, int N){
     int couter = 5;
     for (int i = 0; i < N; ++i) {
         if(dice[i] == size + 1 && couter != 0){
@@ -59,13 +84,13 @@ int alike(const int *dice, int *sum, int size){
     return *sum;
 }
 
-void roll_multiple_dies(int *array){
+void roll_multiple_dies(int *array, int N){
     for (int i = 0; i < N; ++i) {
         array[i] = (rand() % DIE_MAX_EYES) + 1;
         printf(" %d", array[i]);
     }
 }
-int pair_one(const int *dice, int *sum, int ishoue)
+int pair_one(const int *dice, int *sum, int ishoue,int N)
 {
     int myresult = 0;
     for (int j = 0; j < N; ++j)
@@ -80,9 +105,9 @@ int pair_one(const int *dice, int *sum, int ishoue)
     }
     return *sum;
 }
-int pair_two(const int *dice, int *sum)
+int pair_two(const int *dice, int *sum, int N)
 {
-    int first_pair = pair_one(dice, sum, 0)/2;
+    int first_pair = pair_one(dice, sum, 0, N)/2;
     *sum = 0;
     if(first_pair == 0)return 0;
     int myresult = 0;
@@ -100,7 +125,7 @@ int pair_two(const int *dice, int *sum)
 }
 
 
-int three_alike(const int *dice, int *sum, int is_four)
+int three_alike(const int *dice, int *sum, int is_four, int N)
 {
     int current_result = 0;
     for (int i = 0; i < N; ++i) {
@@ -122,7 +147,7 @@ int three_alike(const int *dice, int *sum, int is_four)
     *sum = current_result;
     return current_result;
 }
-int small_lange(const int *dice, int *sum, int stor){
+int small_lange(const int *dice, int *sum, int stor, int N){
     int current_result = 0;
     for (int i = 0; i < N; ++i)
     {
@@ -144,35 +169,41 @@ int small_lange(const int *dice, int *sum, int stor){
     *sum = current_result;
     return current_result;
 }
-int house(const int *dice, int *sum){
-    int threePair = three_alike(dice, sum, 0) / 3;
-    int onePair = pair_one(dice, sum, threePair);
+int house(const int *dice, int *sum, int N){
+    int threePair = three_alike(dice, sum, 0, N) / 3;
+    int onePair = pair_one(dice, sum, threePair, N);
     *sum = onePair + (threePair * 3);
     return *sum;
 }
 int compaire (const void * a, const void * b) {
     return ( *(int*)a - *(int*)b );
 }
-int chance(int *dice, int *sum){
+int chance(int *dice, int *sum, int N){
     qsort(dice, N, sizeof(int), compaire);
-    for (int i  = N - 1; i > N - 6; i--) {
-        *sum = *sum + dice[i];
+    for (int i  = N - 1 ; i > N - 6; i--) {
+        if (i<0)break;
+        *sum  = *sum  + dice[i];
     }
     return *sum;
 }
-int yatzy(const int *dice, int *sum) {
-    int current_result = 0;
-    for (int i = 0; i < N; ++i) {
-        for (int j = 0 + 1; j < N; ++j) {
-            for (int k = 0 + 2; k < N; ++k) {
-                for (int l = 0 + 3; l < N; ++l) {
-                    for (int m = 0 + 4; m < N; ++m) {
-                        //if (dice[i] == dice[j] && dice[i] == dice[k] && dice[i] == dice[l] && dice[i] == dice[m] )printf("xxxxx%d", dice[m]);
-                    }
+int yatzy(int *dice, int *sum, int N) {
+    int counter = 5;
+    int result = 0;
+    qsort(dice, N, sizeof(int), compaire);
+    for (int i = 0; i < N ; ++i)
+    {
+        for (int j = 0; j < N; ++j)
+        {
+            if ( i!=j && dice[i] == dice[j])
+            {
+                counter--;
+                if (counter == 0){
+                    result = 50;
                 }
             }
         }
+        counter = 5;
     }
-    *sum = current_result;
-    return current_result;
+    *sum = result;
+    return result;
 }
