@@ -12,7 +12,7 @@ int alike(const int *dice, int *sum, int size, int N);
 int pair_one(const int *dice, int *sum, int ishoue, int N);
 int pair_two(const int *dice, int *sum, int N);
 int three_alike(const int *dice, int *sum, int is_four, int N);
-int small_lange(const int *dice, int *sum, int stor, int N);
+int small_large(const int *dice, int *sum, int stor, int N);
 int yatzy(int *dice, int *sum, int N);
 int house(const int *dice, int *sum, int N);
 int chance(int *dice, int *sum, int N);
@@ -55,10 +55,10 @@ int main(void) {
                 printf(" -- %d", three_alike(dice_array, &sum_arry[i], 1, N));
                 break;
             case 10:
-                printf(" -- %d", small_lange(dice_array, &sum_arry[i], 0, N));
+                printf(" -- %d", small_large(dice_array, &sum_arry[i], 0, N));
                 break;
             case 11:
-                printf(" -- %d", small_lange(dice_array, &sum_arry[i], 1, N));
+                printf(" -- %d", small_large(dice_array, &sum_arry[i], 1, N));
                 break;
             case 12:
                 printf(" -- %d", house(dice_array, &sum_arry[i], N));
@@ -91,6 +91,7 @@ int main(void) {
     return 0;
 }
 
+//her finder vi alle 1'ere til 6'ere
 int alike(const int *dice, int *sum, int size, int N){
     int couter = 5;
     for (int i = 0; i < N; ++i) {
@@ -102,12 +103,14 @@ int alike(const int *dice, int *sum, int size, int N){
     return *sum;
 }
 
+//her laver vi et int array som simulere et terning kast
 void roll_multiple_dies(int *array, int N){
     for (int i = 0; i < N; ++i) {
         array[i] = (rand() % DIE_MAX_EYES) + 1;
         printf(" %d", array[i]);
     }
 }
+//denne funktion finder et par og er med til at finde fuld hus 
 int pair_one(const int *dice, int *sum, int ishoue,int N)
 {
     int myresult = 0;
@@ -123,6 +126,7 @@ int pair_one(const int *dice, int *sum, int ishoue,int N)
     }
     return *sum;
 }
+//her finder vi 2 par
 int pair_two(const int *dice, int *sum, int N)
 {
     int first_pair = pair_one(dice, sum, 0, N)/2;
@@ -142,7 +146,7 @@ int pair_two(const int *dice, int *sum, int N)
     return *sum;
 }
 
-
+//denne funktion finder tre go fire ens
 int three_alike(const int *dice, int *sum, int is_four, int N)
 {
     int current_result = 0;
@@ -164,7 +168,8 @@ int three_alike(const int *dice, int *sum, int is_four, int N)
     }
     *sum = current_result;return current_result;
 }
-int small_lange(const int *dice, int *sum, int stor, int N){
+//denne funktion finder lille og stor
+int small_large(const int *dice, int *sum, int stor, int N){
     int current_result = 0;
     for (int i = 0; i < N; ++i)
     {
@@ -190,15 +195,21 @@ int small_lange(const int *dice, int *sum, int stor, int N){
     *sum = current_result;
     return current_result;
 }
+
+//denne funktion finder fuld hus den bruger 2 funktioner
 int house(const int *dice, int *sum, int N){
     int threePair = three_alike(dice, sum, 0, N) / 3;
     int onePair = pair_one(dice, sum, threePair, N);
     *sum = onePair + (threePair * 3);
     return *sum;
 }
+
+//denne funtion bruger vi når vi skal qsort
 int compaire (const void * a, const void * b) {
     return ( *(int*)a - *(int*)b );
 }
+
+//denne finder chance
 int chance(int *dice, int *sum, int N){
     qsort(dice, N, sizeof(int), compaire);
     for (int i  = N - 1 ; i > N - 6; i--) {
@@ -207,6 +218,7 @@ int chance(int *dice, int *sum, int N){
     }
     return *sum;
 }
+//her finder vi yatzy ved brug af qsort
 int yatzy(int *dice, int *sum, int N) {
     int counter = 5;
     int result = 0;
