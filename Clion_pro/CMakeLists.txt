@@ -4,4 +4,5 @@ project(untitled)
 set(CMAKE_CXX_STANDARD 17)
 
 add_executable(untitled yatzi.c)
+add_executable(dianna yatziEX.c)
 add_executable(turning fodboldturninging.c)

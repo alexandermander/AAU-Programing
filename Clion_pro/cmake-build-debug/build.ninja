@@ -39,7 +39,7 @@ include CMakeFiles/rules.ninja
 #############################################
 # Logical path to working directory; prefix for absolute paths.
 
-cmake_ninja_workdir = C$:/Users/alexa/CLionProjects/Clion_pro/cmake-build-debug/
+cmake_ninja_workdir = C$:/Users/alexa/Sander_Suff/AAU-Programing/Clion_pro/cmake-build-debug/
 # =============================================================================
 # Object build statements for EXECUTABLE target untitled
 
@@ -49,7 +49,7 @@ cmake_ninja_workdir = C$:/Users/alexa/CLionProjects/Clion_pro/cmake-build-debug/
 
 build cmake_object_order_depends_target_untitled: phony || CMakeFiles/untitled.dir
 
-build CMakeFiles/untitled.dir/yatzi.c.obj: C_COMPILER__untitled_Debug C$:/Users/alexa/CLionProjects/Clion_pro/yatzi.c || cmake_object_order_depends_target_untitled
+build CMakeFiles/untitled.dir/yatzi.c.obj: C_COMPILER__untitled_Debug C$:/Users/alexa/Sander_Suff/AAU-Programing/Clion_pro/yatzi.c || cmake_object_order_depends_target_untitled
   DEP_FILE = CMakeFiles\untitled.dir\yatzi.c.obj.d
   FLAGS = -g
   OBJECT_DIR = CMakeFiles\untitled.dir
@@ -73,12 +73,78 @@ build untitled.exe: C_EXECUTABLE_LINKER__untitled_Debug CMakeFiles/untitled.dir/
   TARGET_IMPLIB = libuntitled.dll.a
   TARGET_PDB = untitled.exe.dbg
 
+# =============================================================================
+# Object build statements for EXECUTABLE target dianna
+
+
+#############################################
+# Order-only phony target for dianna
+
+build cmake_object_order_depends_target_dianna: phony || CMakeFiles/dianna.dir
+
+build CMakeFiles/dianna.dir/yatziEX.c.obj: C_COMPILER__dianna_Debug C$:/Users/alexa/Sander_Suff/AAU-Programing/Clion_pro/yatziEX.c || cmake_object_order_depends_target_dianna
+  DEP_FILE = CMakeFiles\dianna.dir\yatziEX.c.obj.d
+  FLAGS = -g
+  OBJECT_DIR = CMakeFiles\dianna.dir
+  OBJECT_FILE_DIR = CMakeFiles\dianna.dir
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target dianna
+
+
+#############################################
+# Link the executable dianna.exe
+
+build dianna.exe: C_EXECUTABLE_LINKER__dianna_Debug CMakeFiles/dianna.dir/yatziEX.c.obj
+  FLAGS = -g
+  LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  OBJECT_DIR = CMakeFiles\dianna.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_FILE = dianna.exe
+  TARGET_IMPLIB = libdianna.dll.a
+  TARGET_PDB = dianna.exe.dbg
+
+# =============================================================================
+# Object build statements for EXECUTABLE target turning
+
+
+#############################################
+# Order-only phony target for turning
+
+build cmake_object_order_depends_target_turning: phony || CMakeFiles/turning.dir
+
+build CMakeFiles/turning.dir/fodboldturninging.c.obj: C_COMPILER__turning_Debug C$:/Users/alexa/Sander_Suff/AAU-Programing/Clion_pro/fodboldturninging.c || cmake_object_order_depends_target_turning
+  DEP_FILE = CMakeFiles\turning.dir\fodboldturninging.c.obj.d
+  FLAGS = -g
+  OBJECT_DIR = CMakeFiles\turning.dir
+  OBJECT_FILE_DIR = CMakeFiles\turning.dir
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target turning
+
+
+#############################################
+# Link the executable turning.exe
+
+build turning.exe: C_EXECUTABLE_LINKER__turning_Debug CMakeFiles/turning.dir/fodboldturninging.c.obj
+  FLAGS = -g
+  LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  OBJECT_DIR = CMakeFiles\turning.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_FILE = turning.exe
+  TARGET_IMPLIB = libturning.dll.a
+  TARGET_PDB = turning.exe.dbg
+
 
 #############################################
 # Utility command for edit_cache
 
 build CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\alexa\CLionProjects\Clion_pro\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2022.2.4\bin\cmake\win\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
+  COMMAND = cmd.exe /C "cd /D C:\Users\alexa\Sander_Suff\AAU-Programing\Clion_pro\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2022.2.4\bin\cmake\win\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -89,7 +155,7 @@ build edit_cache: phony CMakeFiles/edit_cache.util
 # Utility command for rebuild_cache
 
 build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\alexa\CLionProjects\Clion_pro\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2022.2.4\bin\cmake\win\bin\cmake.exe" --regenerate-during-build -SC:\Users\alexa\CLionProjects\Clion_pro -BC:\Users\alexa\CLionProjects\Clion_pro\cmake-build-debug"
+  COMMAND = cmd.exe /C "cd /D C:\Users\alexa\Sander_Suff\AAU-Programing\Clion_pro\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2022.2.4\bin\cmake\win\bin\cmake.exe" --regenerate-during-build -SC:\Users\alexa\Sander_Suff\AAU-Programing\Clion_pro -BC:\Users\alexa\Sander_Suff\AAU-Programing\Clion_pro\cmake-build-debug"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -99,6 +165,10 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 # =============================================================================
 # Target aliases.
 
+build dianna: phony dianna.exe
+
+build turning: phony turning.exe
+
 build untitled: phony untitled.exe
 
 # =============================================================================
@@ -107,9 +177,9 @@ build untitled: phony untitled.exe
 # =============================================================================
 
 #############################################
-# Folder: C:/Users/alexa/CLionProjects/Clion_pro/cmake-build-debug
+# Folder: C:/Users/alexa/Sander_Suff/AAU-Programing/Clion_pro/cmake-build-debug
 
-build all: phony untitled.exe
+build all: phony untitled.exe dianna.exe turning.exe
 
 # =============================================================================
 # Built-in targets

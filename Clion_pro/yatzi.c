@@ -107,7 +107,7 @@ int alike(const int *dice, int *sum, int size, int N){
 void roll_multiple_dies(int *array, int N){
     for (int i = 0; i < N; ++i) {
         array[i] = (rand() % DIE_MAX_EYES) + 1;
-        printf(" %d", array[i]);
+        //printf(" %d", array[i]);
     }
 }
 //denne funktion finder et par og er med til at finde fuld hus 
