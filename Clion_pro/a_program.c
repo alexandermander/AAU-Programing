@@ -8,7 +8,7 @@
 
 int manin(void ) {
     short character;
-//aa
+//aa3<
     while(1){
         sleep(10);
         for (character = 8; character <=222 ; ++character) {
