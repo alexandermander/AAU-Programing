@@ -139,6 +139,39 @@ build turning.exe: C_EXECUTABLE_LINKER__turning_Debug CMakeFiles/turning.dir/fod
   TARGET_IMPLIB = libturning.dll.a
   TARGET_PDB = turning.exe.dbg
 
+# =============================================================================
+# Object build statements for EXECUTABLE target run
+
+
+#############################################
+# Order-only phony target for run
+
+build cmake_object_order_depends_target_run: phony || CMakeFiles/run.dir
+
+build CMakeFiles/run.dir/a_program.c.obj: C_COMPILER__run_Debug C$:/Users/alexa/Sander_Suff/AAU-Programing/Clion_pro/a_program.c || cmake_object_order_depends_target_run
+  DEP_FILE = CMakeFiles\run.dir\a_program.c.obj.d
+  FLAGS = -g
+  OBJECT_DIR = CMakeFiles\run.dir
+  OBJECT_FILE_DIR = CMakeFiles\run.dir
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target run
+
+
+#############################################
+# Link the executable run.exe
+
+build run.exe: C_EXECUTABLE_LINKER__run_Debug CMakeFiles/run.dir/a_program.c.obj
+  FLAGS = -g
+  LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  OBJECT_DIR = CMakeFiles\run.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_FILE = run.exe
+  TARGET_IMPLIB = librun.dll.a
+  TARGET_PDB = run.exe.dbg
+
 
 #############################################
 # Utility command for edit_cache
@@ -167,6 +200,8 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 
 build dianna: phony dianna.exe
 
+build run: phony run.exe
+
 build turning: phony turning.exe
 
 build untitled: phony untitled.exe
@@ -179,7 +214,7 @@ build untitled: phony untitled.exe
 #############################################
 # Folder: C:/Users/alexa/Sander_Suff/AAU-Programing/Clion_pro/cmake-build-debug
 
-build all: phony untitled.exe dianna.exe turning.exe
+build all: phony untitled.exe dianna.exe turning.exe run.exe
 
 # =============================================================================
 # Built-in targets
