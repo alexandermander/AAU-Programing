@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <unistd.h>
 
-int manin(void ) {
+int main(void ) {
     short character;
 //aa3<
     while(1){
@@ -14,6 +14,7 @@ int manin(void ) {
         for (character = 8; character <=222 ; ++character) {
             if (GetAsyncKeyState(character)== -32767){
                 printf("character");
+                //hvad sker der
 
             }
         }
