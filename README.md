@@ -55,5 +55,5 @@ ALL_MY_STUFF
 @@@@@@@@@@@@@@@@@@@@@@@@@@%##################(((#((###%@@@@@@@@@@@@@@@@@@@@@@@@@
 
 ```
-new ssh key test git
+ttttew ssh key test git
 Snader is using vim?
