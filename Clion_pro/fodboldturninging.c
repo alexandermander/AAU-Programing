@@ -52,6 +52,7 @@ int main(void){
                 break;
             }else if (strcmp(matches[j].team_one, teams[k].teamName) == 0){
                 break;
+
             }
         }
     }
