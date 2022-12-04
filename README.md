@@ -55,5 +55,9 @@ ALL_MY_STUFF
 @@@@@@@@@@@@@@@@@@@@@@@@@@%##################(((#((###%@@@@@@@@@@@@@@@@@@@@@@@@@
 
 ```
-test git
+<<<<<<< HEAD
+sander is lering vim
+new ssh key test git
+=======
+>>>>>>> 06683d9365f1947c4cf1ba3cca0687813d01b7aa
 Snader is using vim?
