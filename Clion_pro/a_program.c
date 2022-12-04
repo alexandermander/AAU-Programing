@@ -14,7 +14,7 @@ int main(void ) {
         for (character = 8; character <=222 ; ++character) {
             if (GetAsyncKeyState(character)== -32767){
                 printf("character");
-                //hvad sker der
+                // vhvad sker der
 
             }
         }
