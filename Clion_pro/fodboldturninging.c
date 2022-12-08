@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
 #define LENTHOFTXT 102
+#define HOLD 12
 
 typedef struct{
     char weekday[4];
@@ -19,17 +21,57 @@ typedef struct{
     int goal_aginet;
 }soccer_team;
 
-void calcliotin(char team[4], int own_score, int enemy_score, soccer_team *all_teams);
 
+int cmpfunc (const void * a, const void * b) {
+
+    soccer_team *valueOne = (soccer_team *)a;
+    soccer_team *valueTow = (soccer_team *)b;
+
+    return ( valueTow->points - valueOne->points );
+}
+
+void findTeamNams(soccer_team *teams, MATCH *matches);
+void readFileInStruckMatch(FILE *myfile, MATCH *matches);
+void calculatornationOfScore(char team[4], int own_score, int enemy_score, soccer_team *all_teams);
 int main(void){
     MATCH matches[102];
-    FILE *fin = fopen("kampe-2022-2023.txt", "r");
-    if (fin == NULL){
+    FILE *file = fopen("kampe-2022-2023.txt", "r");
+    if (file == NULL){
         exit(EXIT_FAILURE);
     }
+
+    readFileInStruckMatch(file, matches);
+    fclose(file);
+
+    soccer_team teams[HOLD] = {0};
+
+    findTeamNams(teams, matches);
+
+
+    for (int j = 0; j < LENTHOFTXT; ++j) {
+        calculatornationOfScore(matches[j].team_one, matches[j].soceone, matches[j].socetwo, teams);
+        calculatornationOfScore(matches[j].team_two, matches[j].socetwo, matches[j].soceone, teams);
+    }
+
+    qsort(teams, HOLD, sizeof(soccer_team), cmpfunc);
+
+
+    printf("Hold navnet, Hold points,  hold mål  -  mål scoret på\n");
+
+    for (int j = 0; j < 12; ++j) {
+        if (teams[j].teamName[2] == '\000' || teams[j].points < 10){
+            printf(" ");
+        }
+        printf("   %s:         %d:               %d - %d",teams[j].teamName, teams[j].points, teams[j].goals, teams[j].goal_aginet);
+        printf("\n");
+    }
+}
+
+
+void readFileInStruckMatch(FILE *myfile, MATCH *matches){
     int i = 0;
-    while (!feof(fin)){
-        fscanf(fin, "%s %s %lf %s - %s %d - %d %d",
+    while (!feof(myfile)){
+        fscanf(myfile, "%s %s %lf %s - %s %d - %d %d",
                matches[i].weekday,
                matches[i].date,
                &matches[i].time,
@@ -40,40 +82,32 @@ int main(void){
                &matches[i].audinc);
         i++;
     }
-    fclose(fin);
-    soccer_team teams[12] = {0};
+
+}
+
+void findTeamNams(soccer_team *teams, MATCH *matches){
 
 
     for (int j = 0; j < LENTHOFTXT; ++j) {
         for (int k =0; k < 12; ++k) {
-            if (strcmp(matches[j].team_one, teams[k].teamName) != 0
-            && teams[k].teamName[0] == '\000'){
+            if (strcmp(matches[j].team_one, teams[k].teamName) == 0){
+                break;
+            }else if (strcmp(matches[j].team_one, teams[k].teamName) != 0
+                      && teams[k].teamName[0] == '\000')
+            {
                 strncpy(teams[k].teamName, matches[j].team_one, 4);
                 break;
-            }else if (strcmp(matches[j].team_one, teams[k].teamName) == 0){
-                break;
-
             }
         }
     }
 
-
-    for (int j = 0; j < LENTHOFTXT; ++j) {
-       calcliotin(matches[j].team_one, matches[j].soceone, matches[j].socetwo, teams);
-       calcliotin(matches[j].team_two, matches[j].socetwo, matches[j].soceone, teams);
-    }
-
-    for (int j = 0; j < 12; ++j) {
-        printf("Hold navnet: %s, Hold points: %d, hold mål scoret: %d, mål der er scoret på dette hold %d", teams[j].teamName, teams[j].points, teams[j].goals, teams[j].goal_aginet);
-        printf("\n");
-    }
 }
 
-void calcliotin(char team[4], int own_score, int enemy_score, soccer_team *all_teams){
+
+void calculatornationOfScore(char team[4], int own_score, int enemy_score, soccer_team *all_teams){
     int i = 0;
     for (i; i < 12; ++i) {
         if (strcmp(team, all_teams[i].teamName) == 0){
-            //printf("yoooo det virker %s - %s\n", team, all_teams[i].teamName);
             break;
         }
     }
