@@ -19,7 +19,7 @@ console.log(time)
 if(time>8 && time < 16 && document.domain == 'www.youtube.com'){
     run()
 }
-
+//snader
 function run(){
     document.body.innerHTML = "Sander SE ikke youType lige nu, lav noget Produktivt"
     const myHtml = document.all[0];
