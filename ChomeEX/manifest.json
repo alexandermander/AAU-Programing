@@ -1,0 +1,25 @@
+{
+    "manifest_version": 2,
+  
+    "name": "TinderAI",
+    "description": "fuck description, dont need it - just try it",
+    "version": "1.0",
+  
+    "browser_action": {
+      "default_icon": "icon.png",
+      "default_popup": "popup.html"
+    },
+    "permissions": [
+      "tabs",
+      "<all_urls>"
+    ],
+    "content_scripts":[
+        {
+            "matches": ["<all_urls>"],
+            "js": ["content.js"]
+        }
+    ]    
+
+
+
+  }
