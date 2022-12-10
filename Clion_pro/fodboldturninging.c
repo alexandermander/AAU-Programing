@@ -33,9 +33,14 @@ int cmpfunc (const void * a, const void * b) {
 void findTeamNams(soccer_team *teams, MATCH *matches);
 void readFileInStruckMatch(FILE *myfile, MATCH *matches);
 void calculatornationOfScore(char team[4], int own_score, int enemy_score, soccer_team *all_teams);
+
+
 int main(void){
     MATCH matches[102];
+
     FILE *file = fopen("kampe-2022-2023.txt", "r");
+
+
     if (file == NULL){
         exit(EXIT_FAILURE);
     }
@@ -43,8 +48,8 @@ int main(void){
     readFileInStruckMatch(file, matches);
     fclose(file);
 
-    soccer_team teams[HOLD] = {0};
 
+    soccer_team teams[HOLD] = {0};
     findTeamNams(teams, matches);
 
 
@@ -56,15 +61,18 @@ int main(void){
     qsort(teams, HOLD, sizeof(soccer_team), cmpfunc);
 
 
-    printf("Hold navnet, Hold points,  hold mål  -  mål scoret på\n");
+    printf("Hold navnet, Hold points,  hold mål  -  mål mod hold\n");
 
     for (int j = 0; j < 12; ++j) {
         if (teams[j].teamName[2] == '\000' || teams[j].points < 10){
             printf(" ");
         }
-        printf("   %s:         %d:               %d - %d",teams[j].teamName, teams[j].points, teams[j].goals, teams[j].goal_aginet);
+        printf("   %s:          %d:              %d - %d",teams[j].teamName, teams[j].points, teams[j].goals, teams[j].goal_aginet);
         printf("\n");
     }
+
+    printf("Ergo ")
+
 }
 
 
