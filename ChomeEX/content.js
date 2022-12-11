@@ -16,7 +16,7 @@
 const d = new Date();
 let time = d.getHours();
 console.log(time)
-if(time>9&& time < 16 && document.domain == 'www.youtube.com' || document.domain == 'www.instagram.com'){
+if(time>9&& time < 16 && document.domain == 'www.youtube.com' ||time>9&& time < 16 && document.domain == 'www.instagram.com'){
     run()
 }
 function run(){
