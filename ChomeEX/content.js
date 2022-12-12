@@ -16,13 +16,13 @@
 const d = new Date();
 let time = d.getHours();
 console.log(time)
-if(time>9&& time < 16 && document.domain == 'www.youtube.com' ||time>9&& time < 16 && document.domain == 'www.instagram.com'){
+if(time>8&& time < 16 && document.domain == 'www.youtube.com' ||time>9&& time < 16 && document.domain == 'www.instagram.com'){
     run()
 }
 function run(){
     if (document.domain == 'www.youtube.com') {
         var fyldOrd = "youType"
-        var color = 'white'
+        var color = 'black'
 
     }else if (document.domain == 'www.instagram.com') {
         var fyldOrd = "instGram"
